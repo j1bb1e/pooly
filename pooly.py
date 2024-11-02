@@ -18,6 +18,17 @@ bot = commands.Bot(command_prefix="$", intents=intents)  # <--- Intents are adde
 async def on_ready():
     print(f'Logged in as {bot.user.name} ({bot.user.id})')
 
+@bot.command(name='help')
+async def help_command(ctx):
+    help_message = (
+        "**Bot Commands:**\n"
+        "`$poll <duration> <question> <option1> <option2> ...`: Creates a poll with the specified duration (in minutes) and options.\n"
+        "Example: `$poll 5 \"What is your favorite color?\" \"Red\" \"Blue\" \"Green\"`\n\n"
+        "`$help`: Displays this help message.\n"
+        "Use the above commands to interact with the bot."
+    )
+    await ctx.send(help_message)
+
 @bot.command(name='poll')
 async def poll(ctx, question: str, *options):
     if len(options) < 2:
